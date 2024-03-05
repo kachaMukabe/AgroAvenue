@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useSignUp } from '@clerk/clerk-expo';
+import { router } from 'expo-router';
 
 export default function SignUpScreen() {
   const { isLoaded, signUp, setActive } = useSignUp();
@@ -48,6 +49,7 @@ export default function SignUpScreen() {
       });
 
       await setActive({ session: completeSignUp.createdSessionId });
+      router.replace('/');
     } catch (err) {
       console.error(JSON.stringify(err, null, 2));
     }
