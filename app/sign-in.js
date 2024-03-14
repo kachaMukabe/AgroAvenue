@@ -1,7 +1,10 @@
 import * as React from 'react';
-import { Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { Input, Button, Text } from '@ui-kitten/components';
+import { Image } from 'expo-image';
 import { Link, router } from 'expo-router';
 import { useSignIn, useAuth } from '@clerk/clerk-expo';
+import { FontAwesome } from '@expo/vector-icons';
 
 export default function SignIn() {
   const { isLoaded, signIn, setActive } = useSignIn();
@@ -31,9 +34,15 @@ export default function SignIn() {
     }
   };
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <View>
-        <TextInput
+    <View style={styles.container}>
+      <Image
+        style={styles.image}
+        source={require('../assets/logo.png')}
+        contentFit="contain"
+        transition={1000}
+      />
+      <View style={styles.inputContainer}>
+        <Input
           autoCapitalize="none"
           value={emailAddress}
           placeholder="Email..."
@@ -41,8 +50,8 @@ export default function SignIn() {
         />
       </View>
 
-      <View>
-        <TextInput
+      <View style={styles.inputContainer}>
+        <Input
           value={password}
           placeholder="Password..."
           secureTextEntry={true}
@@ -50,11 +59,53 @@ export default function SignIn() {
         />
       </View>
 
-      <TouchableOpacity onPress={onSignInPress}>
-        <Text>Sign in</Text>
-      </TouchableOpacity>
+      <Button style={styles.signInButton} onPress={onSignInPress}>
+        Sign In
+      </Button>
 
-      <Link href="/sign-up">Sign Up</Link>
+      <Link href="/sign-up" asChild>
+        <View
+          style={{
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            justifyContent: 'flex-end',
+          }}
+        >
+          <Text>Sign Up</Text>
+          <FontAwesome name="arrow-right" style={{ margin: 3 }} />
+        </View>
+      </Link>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    flexDirection: 'column',
+    paddingHorizontal: 30,
+  },
+  inputContainer: {
+    paddingTop: 16,
+  },
+  signInButton: {
+    marginVertical: 16,
+  },
+  signUpButton: {
+    marginVertical: 12,
+    marginHorizontal: 16,
+  },
+  forgotPasswordContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
+  forgotPasswordButton: {
+    paddingHorizontal: 0,
+  },
+  image: {
+    height: '20%',
+    width: '40%',
+    marginHorizontal: '30%',
+  },
+});

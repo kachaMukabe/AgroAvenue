@@ -15,6 +15,14 @@ export const getFarmer = query({
   },
 });
 
+export const getAllFarmers = query({
+  args: {},
+  handler: async (ctx, args) => {
+    const farmers = await ctx.db.query('farmers').collect();
+    return farmers;
+  },
+});
+
 export const store = mutation({
   args: {},
   handler: async (ctx) => {
@@ -30,13 +38,12 @@ export const store = mutation({
       )
       .unique();
     if (farmer !== null) {
-      return farmer;
+      return farmer._id;
     }
 
     return await ctx.db.insert('farmers', {
       name: identity.name,
       tokenIdentifier: identity.tokenIdentifier,
-      id: identity.subject,
     });
   },
 });
