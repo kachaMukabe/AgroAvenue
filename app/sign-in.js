@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Input, Button, Text } from '@ui-kitten/components';
 import { Image } from 'expo-image';
 import { Link, router } from 'expo-router';
@@ -64,16 +64,18 @@ export default function SignIn() {
       </Button>
 
       <Link href="/sign-up" asChild>
-        <View
-          style={{
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            justifyContent: 'flex-end',
-          }}
-        >
-          <Text>Sign Up</Text>
-          <FontAwesome name="arrow-right" style={{ margin: 3 }} />
-        </View>
+        <TouchableOpacity>
+          <View
+            style={{
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              justifyContent: 'flex-end',
+            }}
+          >
+            <Text>Sign Up</Text>
+            <FontAwesome name="arrow-right" style={{ margin: 3 }} />
+          </View>
+        </TouchableOpacity>
       </Link>
     </View>
   );

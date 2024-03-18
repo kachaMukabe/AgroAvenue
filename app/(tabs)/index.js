@@ -11,6 +11,7 @@ import {
   Divider,
   StyleService,
   useStyleSheet,
+  List,
 } from '@ui-kitten/components';
 import Vouchers from '../../components/Vouchers';
 import { Icon, IconElement } from '@ui-kitten/components';
@@ -62,28 +63,18 @@ export default function Index() {
           <Avatar
             style={styles.profileAvatar}
             size="large"
-            source={require('../../assets/icon.png')}
+            source={require('../../assets/logo.png')}
           />
           <View style={styles.profileDetailsContainer}>
             <Text category="h4">{user.fullName}</Text>
-            <Text appearance="hint" category="s1"></Text>
+            <Text appearance="hint" category="s1">
+              {user.primaryEmailAddress.emailAddress}
+            </Text>
           </View>
         </View>
-        <Button style={styles.followButton}>FOLLOW</Button>
         <Text style={styles.descriptionText} appearance="hint"></Text>
       </Layout>
-      <View style={styles.profileParametersContainer}>
-        <View style={styles.profileSocialsSection}></View>
-        <Divider style={styles.profileSectionsDivider} />
-        <View style={styles.profileParametersSection}>
-          <ProfileParameterCard
-            style={styles.profileParameter}
-            hint="Height"
-            value="Hello"
-            icon={ArrowHeadUpIcon}
-          />
-        </View>
-      </View>
+      <Vouchers />
     </Layout>
   );
 }
